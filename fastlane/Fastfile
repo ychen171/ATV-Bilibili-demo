@@ -28,4 +28,18 @@ platform :tvos do
     sh "cd .. && mv BilbiliAtvDemo.zip BilbiliAtvDemo.ipa"
     sh "cd .. && rm -rf Payload *.xcarchive *.zip || true"
   end
+
+  lane :deploy_device do |options|
+    device = options[:device] || "Apple TV 4K"
+    sh(
+      "xcodebuild",
+      "-project", "../BilibiliLive.xcodeproj",
+      "-scheme", "BilibiliLive",
+      "-destination", "platform=tvOS,name=#{device}",
+      "-configuration", "Debug",
+      "-allowProvisioningUpdates",
+      "CODE_SIGN_STYLE=Automatic",
+      "DEVELOPMENT_TEAM=6R5N5WWF42"
+    )
+  end
 end
