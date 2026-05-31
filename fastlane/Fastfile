@@ -41,5 +41,8 @@ platform :tvos do
       "CODE_SIGN_STYLE=Automatic",
       "DEVELOPMENT_TEAM=6R5N5WWF42"
     )
+    built_app = `xcodebuild -showBuildSettings -project ../BilibiliLive.xcodeproj -scheme BilibiliLive -configuration Debug 2>/dev/null | grep '^ *BUILT_PRODUCTS_DIR ' | awk '{print $3}'`.strip
+    app_path = "#{built_app}/BilibiliLive.app"
+    sh("xcrun", "devicectl", "device", "install", "app", "--device", device, app_path)
   end
 end
