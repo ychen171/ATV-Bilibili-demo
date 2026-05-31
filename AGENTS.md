@@ -10,6 +10,10 @@ fastlane build_simulator
 
 # Build unsigned IPA for Apple TV
 fastlane build_unsign_ipa
+
+# Build and deploy directly to a network-paired Apple TV (requires Xcode device pairing)
+fastlane deploy_device                          # default device name "Apple TV 4K"
+fastlane deploy_device device:"Living Room"     # custom device name
 ```
 
 There is no test suite. Build verification happens through the Xcode project. Use Xcode directly for development and debugging.
